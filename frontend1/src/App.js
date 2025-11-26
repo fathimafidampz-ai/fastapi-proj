@@ -4,7 +4,7 @@ import "./App.css";
 import TaglineSection from "./TaglineSection";
 
 const api = axios.create({
-  baseURL: "http://localhost:9000",
+  baseURL: "https://product-listing-wtpy.onrender.com/",
 });
 
 function App() {
