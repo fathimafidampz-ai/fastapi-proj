@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:20-alpine AS build
+FROM node:20 AS build
 
 WORKDIR /app
 
@@ -11,7 +11,12 @@ RUN npm install
 COPY . .
 
 # Build the React app
-RUN npm run build
+RUN npx react-scripts build
+
+
+
+RUN chmod +x ./node_modules/.bin/react-scripts
+
 
 # Stage 2: Serve with Nginx
 FROM nginx:stable-alpine
