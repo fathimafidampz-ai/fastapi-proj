@@ -4,7 +4,7 @@ import "./App.css";
 import TaglineSection from "./TaglineSection";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "http://localhost:9000",
 });
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await api.get("/products/");
+      const res = await api.get("/products");
       setProducts(res.data);
       setError("");
     } catch (err) {
@@ -61,7 +61,7 @@ function App() {
     const run = async () => {
       setLoading(true);
       try {
-        const res = await api.get("/products/");
+        const res = await api.get("/products");
         setProducts(res.data);
         setError("");
       } catch (err) {
@@ -144,7 +144,7 @@ function App() {
         });
         setMessage("Product updated successfully");
       } else {
-        await api.post("/products/", {
+        await api.post("/products", {
           ...form,
           id: Number(form.id),
           price: Number(form.price),
@@ -178,6 +178,7 @@ function App() {
   const handleDelete = async (id) => {
     const ok = window.confirm("Delete this product?");
     if (!ok) return;
+
     setLoading(true);
     setMessage("");
     setError("");
@@ -344,9 +345,11 @@ function App() {
                             <button className="btn btn-edit" onClick={() => handleEdit(p)}>
                               Edit
                             </button>
-                            <button className="btn btn-delete" onClick={() => handleDelete(p.id)}>
+                            
+                            <button className="btn btn-delete" onClick={() => handleDelete(p._id)}>
                               Delete
                             </button>
+
                           </div>
                         </td>
                       </tr>
